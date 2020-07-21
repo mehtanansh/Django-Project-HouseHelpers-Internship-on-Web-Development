@@ -91,10 +91,6 @@ WSGI_APPLICATION = 'HouseHelpers.wsgi.application'
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-if os.environ.get('DATABASE_URL'):
-    DATABASES['default'] =
-        dj_database_url.config(default=os.environ['DATABASE_URL'])
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
@@ -152,3 +148,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT=587
+
+django_heroku.settings(locals())
