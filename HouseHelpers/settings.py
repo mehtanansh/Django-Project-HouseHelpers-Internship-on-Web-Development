@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 
-import os
+import os,django_heroku
 import dj_database_url
 import psycopg2
 
