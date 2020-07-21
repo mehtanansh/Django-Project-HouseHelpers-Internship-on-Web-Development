@@ -129,6 +129,11 @@ STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles'),
 STATIC_URL = '/static/'
 
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
 EMAIL_USE_TLS=True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
