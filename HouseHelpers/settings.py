@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import psycopg2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,15 +76,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'HouseHelpers.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] =
+        dj_database_url.config(default=os.environ['DATABASE_URL'])
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
@@ -140,5 +152,3 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT=587
-
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
