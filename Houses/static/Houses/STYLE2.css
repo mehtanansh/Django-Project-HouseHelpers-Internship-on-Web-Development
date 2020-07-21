@@ -1,0 +1,12 @@
+body
+{
+background-image:url("BackFin2.jpg");
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+background-position: 50% 50%;
+font-family: sans-serif;
+color: yellow;
+margin:0;
+padding: 0;
+}

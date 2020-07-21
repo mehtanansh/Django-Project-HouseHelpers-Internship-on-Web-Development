@@ -1,0 +1,86 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% block content %}
+<html>
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="0_1_CompanyLogo.png" type="image/x-icon">
+		<style type="text/css">
+			body
+			{
+			background-image:url("{% static 'Houses/DRK2.jpg' %}");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			background-position: 50% 50%;
+			margin:0;
+			padding: 0;
+			}
+
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+		html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+
+		</style>
+	</head>
+	<body style="color:white">
+	<center>
+	<h1>House-Helpers</h1><br>
+    <h2>Professional Services at Your Door-Step</h2>
+	</center>
+	<div style="padding-top: 2%;color: #ff9900">
+		<div>
+			<center>
+				<img src="{% static 'Houses/contactUsHomeService.jpg' %}" width="35%" class="img-fluid" alt="HouseService">
+			</center>
+		</div>
+	</div><br>
+	<center>
+		<div class="container">
+			<h2 style="column-span: all;">Contact Us</h2>
+		  <div class="row">
+		    <div class="col-sm">
+		      <strong>Professional Services</strong><br>
+				Pth Floor, XYZ Centre,<br>
+				ABC Road,<br>
+				Churchgate<br>
+				Mumbai - 400020<br>
+				India
+		    </div>
+		    <div class="col-sm">
+		    T +91 abcdefghij<br>
+			T +91 abcdefghij<br>
+			F +91 abcdefghij<br>
+			help@HouseHelpers.com<br>
+			Queries@HouseHelpers.com<br>
+			</div>
+		  </div>
+		</div>
+	<center>
+</body>		
+{% endblock %}

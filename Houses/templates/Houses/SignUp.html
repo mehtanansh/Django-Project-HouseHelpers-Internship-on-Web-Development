@@ -1,0 +1,101 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'Houses/STYLE2.css' %}">
+<style type="text/css">
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+  /* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+</style>
+<body style="color:#FFF307;">
+	<center>
+		<div class="container">
+		    <h1>House-Helpers</h1>
+		    <h2>Professional Services at Your Door-Step</h2>
+		</div>
+		<form method="POST" style="padding-top: 3vw;">
+	      {% csrf_token %}
+	      <fieldset style="width: 40vw;background: rgba(0,0,0,0.5);padding: 2vw;border-radius: 1vw;">
+	      {% for message in messages %}
+	      <div>
+	        <strong>{{ message }}</strong>
+	      </div><br>
+	      {% endfor %}
+		  <div class="form-group col-auto">
+	      	<center>
+	      		<div class="form-row">
+			      <div class="form-group col-md-6 mb-0">
+			      	{{form.First_Name|as_crispy_field}}
+			      </div>
+  				  <div class="form-group col-md-6 mb-0">
+    				{{ form.Last_Name|as_crispy_field }}
+  				  </div>
+  				</div>
+  				<div class="form-group col-md-12 mb-0">
+    				{{ form.Email|as_crispy_field }}
+  				</div>
+  				<div class="form-row">
+  				  <div class="form-group col-md-6 mb-0">
+    				{{ form.Contact|as_crispy_field }}
+  				  </div>
+  				  <div class="form-group col-md-6 mb-0">
+    					{{ form.Gender|as_crispy_field }}
+  				  </div>
+  				</div>
+  				<div class="form-group col-md-10 mb-0">
+					{{ form.username|as_crispy_field }}				
+  				</div>
+				<div class="form-row">
+  					<div class="form-group col-md-6 mb-0">
+						{{ form.password|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-6 mb-0">
+						{{ form.Confirm_Password|as_crispy_field }}
+					</div>
+  				</div>
+  				<div class="form-row">
+  					<div class="form-group col-md-6 mb-0">
+    					{{ form.City|as_crispy_field }}
+  					</div>
+  					<div class="form-group col-md-6 mb-0">
+    					{{ form.PinCode|as_crispy_field }}
+  					</div>				
+  				</div>
+  				<div class="form-group col-md-12 mb-0">
+    				{{ form.Address_Line_1|as_crispy_field }}
+  				</div>
+  				<div class="form-group col-md-12 mb-0">
+    				{{ form.Address_Line_2|as_crispy_field }}
+  				</div>
+
+	      	</center>
+	      </div>
+        <button type="submit" class="btn btn-outline-dark" style="color: #D7FF33;">Sign Up</button>
+		<big class="form-text" style="opacity: 0.8;padding-top:2vw;">
+		<a style="color: #F0FF00;" href="{% url 'SignIn-User' %}">Already a User??</a></big>
+	</center>
+</body>
+{% endblock content %}
+
+<!--
+	<form class="loginform1" style="width:535px; height: 660px;padding-left: 45px;margin-top: 45px;" method="POST">
+	{% csrf_token %}<br>
+	<center style="color: #F1C40F">{% for message in messages %}
+        <p><strong>{{ message }}</strong></p>
+    {% endfor %}</center>
+	<fieldset style="width: 450px; border-radius: 25px;">
+		
+  	<center><input type="submit" value="Register"><br><br>
+	    
+	</center></fieldset><br>
+	</form> -->

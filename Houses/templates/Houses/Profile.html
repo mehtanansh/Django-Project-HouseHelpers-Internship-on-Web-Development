@@ -1,0 +1,197 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% block content %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+*{
+   box-sizing: border-box;
+   color: cyan;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+input[type=text] {
+  width: 45%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+body {
+  background-image: url("{% static 'Houses/steam.jpg' %}");
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin:0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 10;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 5vw;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+<body>
+  <div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <p><img src="{% static 'Houses/avatar.png' %}" width="42px" height="42px" align="left" style="font-size: 25px;"><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HELLO, {{ users.username }} </strong></p><br>
+      <hr style="margin-left: auto;margin-right: auto;border:dashed 2px cyan;"><br>
+      <a href="{% url 'MyAccount_User' %}"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a>
+      <a href="{% url 'Address_User' %}"> <i class="fa fa-address-card" aria-hidden="true"></i> My Address</a>
+      <a href="{% url 'My-Problems-HK' %}"> <i class="fa fa-history" aria-hidden="true"></i> Submitted Problems</a>
+    </div>
+    <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776; More</span>
+  </div>
+  <center>
+  <div class="container">
+    <h1>House-Helpers</h1>
+    <h2>Professional Services at Your Door-Step</h2>
+  </div>
+  <div class="container">
+    {% for message in messages %}
+      <div>
+        <strong style="color: red;">{{ message }}</strong>
+      </div>
+    {% endfor %}
+  <div class="row" style="padding:1vw;">
+    <div class="col-xl-12"> <i><u><strong>PERSONAL INFORMATION</strong></u></i><br>
+      <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        <label for="FName" class="col-xl-6 col-form-label"  style="color:#FFF700;">First Name:</label>
+        <input type="text" readonly class="form-control-plaintext" id="FName" value={{ users.First_Name }} style="color: white">
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        <label for="LName" class="col-xl-6 col-form-label" style="color:#FFF700;">Last Name:</label>
+        <input type="text" readonly class="form-control-plaintext" id="LName" value={{ users.Last_Name }} style="color: white">
+      </div>
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        <label for="gndr" class="col-xl-6 col-form-label"  style="color:#FFF700;">Gender:</label>
+        <input type="text" readonly class="form-control-plaintext" id="gndr" value={{ users.Gender }} style="color: white">
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        <label for="usrnm" class="col-xl-6 col-form-label" style="color:#FFF700;">Username:</label>
+        <input type="text" readonly class="form-control-plaintext" id="usrnm" value={{ users.username }} style="color: white">
+      </div>
+      </div>
+      <div class="col-xl-12 col-form-label">
+        <label for="Email" class="col-xl-6 col-form-label" style="color:#FFF700;">Email:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Email"  rows="25" value={{ users.Email }} style="color: white">
+      </div>
+    </div>
+   </div>
+   <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#myModal"> Change Password </button>
+   <div class="modal fade" id="myModal" role="dialog" style="background-color: rgba(0,0,0,0.9);">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content"  style="background-color: rgba(0,0,0,0.7);">
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>Change Password</strong></h4>
+          <button type="button" class="close" data-dismiss="modal" style="color: cyan">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+          <form class="form-container" method="POST">
+            {% csrf_token %}
+              <label for="live1"><b>Old Password</b></label>
+              <input type="Password" placeholder="Old Password" style="color: black;" name="live1" required><br><br>
+
+              <label for="live2"><b>New Password</b></label>
+              <input type="Password" placeholder="New Password" style="color: black;" name="live2" required><br><br>
+
+               <label for="live3"><b>Confirm Password</b></label>
+               <input type="Password" placeholder="Confirm New Password" style="color: black;" name="live3" required>
+             <BR><BR>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</center>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+</body>
+{% endblock content %}

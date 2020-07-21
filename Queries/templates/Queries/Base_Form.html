@@ -1,0 +1,187 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% load crispy_forms_tags%}
+{% block content %}
+<style type="text/css">
+
+body
+{
+background-image:url("{% static 'Houses/BGI.jpg' %}");
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+background-position: 50% 50%;
+font-family: sans-serif;
+color: rgba(0,0,0,0.9);
+margin:0;
+padding: 0;
+}
+
+label {
+  margin-bottom: 10px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+input[type=text] {
+  width: auto;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+</style>
+<body>
+	<center>
+		<div class="container">
+			<h1>House-Helpers</h1>
+			<h2>Professional Services at Your Door-Step</h2>
+			<form method="POST" style="padding-top: 2vw;background: rgba(0,0,0,0.4);padding: 2vw;" id="FORMS_BASE" name="FORMS_BASE">
+	      	{% csrf_token %}
+	      	{% for message in messages %}
+	      	<div>
+	       		<strong>{{ message }}</strong>
+		  	</div>
+	    	{% endfor %}
+	      	<br>
+	      	<div class="form-group col-auto">
+	      	<center>
+	      		<div class="form-row">
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="FName" class="col-xs-2">First Name</label>
+						<input type="text" disabled="disabled" class="form-control-plaintext" value="{{Cust.First_Name}}">
+				    </div>
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="LName" class="col-xs-2">Last Name</label>
+						<input type="text" disabled="disabled" class="form-control-plaintext" id="LName" name="LName" value="{{Cust.Last_Name}}">
+				    </div>
+				</div>
+	      		<div class="form-row">
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="UsrName" class="col-xs-2">Username</label>
+						<input type="text" disabled="disabled" class="form-control-plaintext" id="UsrName" name="UsrName" value="{{Cust.username}}">
+				      </div>
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="FName" class="col-xs-2">Gender</label>
+						<input type="text" disabled="disabled" class="form-control-plaintext" value="{{Cust.Gender}}">
+			    	</div>
+  				</div>
+  				<div class="form-row">
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="Email" class="col-xs-2">Email</label>
+						<input type="text" id="Email" name="Email" disabled="disabled" class="form-control-plaintext" value="{{Cust.Email}}">
+				      </div>
+			    	<div class="form-group col-md-6 mb-0">
+				      	<label for="Contact" class="col-xs-2">Contact</label>
+						<input type="text" disabled="disabled" name="Contact" id="Contact" class="form-control-plaintext" value="{{Cust.Contact}}">
+			    	</div>
+  				</div>
+	  				<div class="form-group col-md-8 mb-0">
+	    				<label for="Addr_Service" class="col-xs-2">Address of Service (Also Mention Pincode)*</label>
+	    				<textarea name="Addr_Service" class="form-control" id="Addr_Service" rows="3" style="border-radius: 5px;color: black;">{{Cust.Address_Line_1}},{{Cust.Address_Line_2}},{{Cust.City}} : {{Cust.PinCode}}
+	    				</textarea><br><br>
+					</div>
+    				<div class="row">
+			    		<div class="form-group col-md-4 mb-0">
+					      	<label for="PinCode" class="col-xs-4">Pincode*</label>
+							<input type="number" name="PinCode" id="PinCode" value="{{Cust.PinCode}}">
+			    		</div>
+						<div class="form-group col-md-4 mb-0">
+					      	<label for="Avail_date" class="col-xs-4">Date of Service*</label>
+							<input type="date" name="Avail_date" id='Avail_date'>
+			    		</div>
+			    		<div class="form-group col-md-4 mb-0">
+					      	<label for="Avail_time" class="col-xs-4">Time of Service*</label>
+							<input type="time" name="Avail_time" id='Avail_time'>
+			    		</div>
+			    	</div><br>
+			    	<div class="form-group">
+			    	{% if Form1 %}
+
+			    		<div class="form-row" style="width: 60%;padding: 2px;">
+			      			<div class="form-group col-md-7 mb-0">
+			      				{{Form1.Needed_For|as_crispy_field}}
+			      			</div>
+			  				<div class="form-group col-md-5 mb-0">
+			    				{{ Form1.Device|as_crispy_field }}
+			  				</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form1.Description|as_crispy_field }}
+		  				</div>
+	
+					{% elif Form2 %}
+
+						<div class="form-row" style="width: 50%;padding: 2px;">
+			      			<div class="form-group col-md-12 mb-0">
+			      				{{Form2.Activity|as_crispy_field}}
+			      			</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form2.Description|as_crispy_field }}
+		  				</div>
+
+					{% elif Form3 %}
+
+						<div class="form-row" style="width: 60%;padding: 2px;">
+			      			<div class="form-group col-md-12 mb-0">
+			      				{{Form3.Needed_For|as_crispy_field}}
+			      			</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form3.Description|as_crispy_field }}
+		  				</div>
+
+					{% elif Form4 %}
+
+						<div class="form-row" style="width: 60%;padding: 2px;">
+			      			<div class="form-group col-md-12 mb-0">
+			      				{{Form4.Problem_Type|as_crispy_field}}
+			      			</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form4.Description|as_crispy_field }}
+		  				</div>
+
+					{% elif Form5 %}
+
+						<div class="form-row" style="width: 60%;padding: 2px;">
+			      			<div class="form-group col-md-7 mb-0">
+			      				{{Form5.Needed_For|as_crispy_field}}
+			      			</div>
+			  				<div class="form-group col-md-5 mb-0">
+			    				{{ Form5.Activity|as_crispy_field }}
+			  				</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form5.Description|as_crispy_field }}
+		  				</div>
+
+					{% elif Form6 %}
+
+						<div class="form-row" style="width: 60%;padding: 2px;">
+			      			<div class="form-group col-md-7 mb-0">
+			      				{{Form6.Needed_For|as_crispy_field}}
+			      			</div>
+			  				<div class="form-group col-md-5 mb-0">
+			    				{{ Form6.Activity|as_crispy_field }}
+			  				</div>
+		  				</div>
+		  				<div class="form-group col-md-8 mb-0">
+		    				{{ Form6.Description|as_crispy_field }}
+		  				</div>
+
+					{%endif%}</div><br>
+					<button type="submit" class="btn btn-dark" style="color: white;">Submit</button>
+  			</center>
+	  </fieldset>
+	</form>
+</div>
+</center>
+</body>
+{% endblock%}
+
+

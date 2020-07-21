@@ -1,0 +1,585 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+*{
+   box-sizing: border-box;
+   color: cyan;
+}
+
+label {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+input[type=text] {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+body {
+  background-image: url("{% static 'Houses/steam.jpg' %}");
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin:0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 10;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 5vw;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+<body>
+  <div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <p><img src="{% static 'Houses/avatar.png' %}" width="42px" height="42px" align="left" style="font-size: 25px;"><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HELLO, {{ users.username }} </strong></p><br>
+      <hr style="margin-left: auto;margin-right: auto;border:dashed 2px cyan;"><br>
+      <a href="{% url 'MyAccount_User' %}"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a>
+      <a href="{% url 'Address_User' %}"> <i class="fa fa-address-card" aria-hidden="true"></i> My Address</a>
+      <a href="{% url 'My-Problems-HK' %}"> <i class="fa fa-history" aria-hidden="true"></i> Submitted Problems</a>
+    </div>
+    <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776; More</span>
+  </div>
+  <center>
+  <div class="container">
+    <h1>House-Helpers</h1>
+    <h2>Professional Services at Your Door-Step</h2>
+    {% for message in messages %}
+      <div>
+        <strong style="color: red;">{{ message }}</strong>
+      </div>
+    {% endfor %}
+  <div class="row" style="padding:1vw;">
+    <div class="col-xl-12"> <i><u><strong>Registered Problems and Requests</strong></u></i><br>
+    </div>
+  </div>
+  <div class="d-flex flex-row justify-content-around" style="background-color: rgba(0,0,0,0.88);padding: 1.25vw;border-radius: 1vw;font-size: 1.35vw;width:100%">
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fas fa-broom" aria-hidden="true"></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-HK' %}" style="color: cyan;">House-Keeping</a>
+    </div>
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-EL' %}" style="color: cyan;">Electric Appliance Repair
+      </a>
+    </div>
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fa fa-shower" aria-hidden="true"></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-PL' %}" style="color: cyan;">Plumbing</a>
+    </div>
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fa fa-venus-mars" aria-hidden='true'></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-SL' %}" style="color: cyan;">Salon</a>
+    </div>
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fa fa-heart"></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-TR' %}" style="color: cyan;">Trainer</a>
+    </div>
+
+    <div class="p-2" style="padding: 1vw;border-radius: 1vw;">
+      <i class="fa fa-bed"></i>&nbsp;&nbsp;<a href="{% url 'My-Problems-MA' %}" style="color: cyan;">Massage</a>
+    </div>
+  </div>
+  </div>
+  {% if HKS %}
+    <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">House Keeping</h4></center>
+  {% for HK in HKS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Activity: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{HK.get_Activity_display}}"  style="color: white;width: 88%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4" style="color: cyan;">
+      <p>{{HK.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" rows="25" value="{{ HK.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ HK.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if HK.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ HK.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ HK.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ HK.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %} 
+   {% elif SalsS %}
+  <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">Salon and Grooming</h4></center>
+  {% for Sals in SalsS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Activity: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{Sals.get_Activity_display}}"  style="color: white;width: 77%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ND_For" class="col-xs-2">Needed For: </label>
+        <input type="text" readonly class="form-control-plaintext" id="ND_For" name= "ND_For"rows="25" value="{{Sals.Needed_For}}"  style="color: white;width: 67%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4" style="color: cyan;">
+      <p>{{Sals.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" rows="25" value="{{ Sals.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ Sals.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if Sals.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ Sals.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ Sals.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ Sals.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %} 
+   {% elif PlumbS %}
+  <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">Plumbing</h4></center>
+  {% for Plumb in PlumbS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Activity: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{Plumb.get_Problem_Type_display}}"  style="color: white;width: 77%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4" style="color: cyan;">
+      <p>{{Plumb.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" rows="25" value="{{ Plumb.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ Plumb.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if Plumb.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ Plumb.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ Plumb.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ Plumb.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %} 
+   {% elif ElectS %}
+  <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">Electrical Repairs</h4></center>
+  {% for Elect in ElectS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Device: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{Elect.get_Device_display}}"  style="color: white;width: 77%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="col-xs-12 col-form-label">
+        <label for="ND_For" class="col-xs-2">Needed For: </label>
+        <input type="text" readonly class="form-control-plaintext" id="ND_For" name= "ND_For"rows="25" value="{{Elect.Needed_For}}"  style="color: white;width: 70%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-3" style="color: cyan;">
+      <p>{{Elect.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" rows="25" value="{{ Elect.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ Elect.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if Elect.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ Elect.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ Elect.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ Elect.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %} 
+   {% elif TrainS %}
+  <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">Trainer</h4></center>
+  {% for Train in TrainS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Activity: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{Train.get_Activity_display}}"  style="color: white;width: 77%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ND_For" class="col-xs-2">Needed For: </label>
+        <input type="text" readonly class="form-control-plaintext" id="ND_For" name= "ND_For"rows="25" value="{{Train.Needed_For}}"  style="color: white;width: 67%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4" style="color: cyan;">
+      <p>{{Train.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" rows="25" value="{{ Train.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ Train.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if Train.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ Train.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ Train.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ Train.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %}
+   {% elif MassS %}
+    <center><h4 style="padding-top: 1.05vw;padding-bottom: 1.05vw;">Massage</h4></center>
+  {% for Mass in MassS %}
+  <form method="POST">
+    {% csrf_token %}
+  <div class="container" style="background-color: rgba(0,0,0,0.9);">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="col-xs-12 col-form-label">
+        <label for="Act" class="col-xs-2">Needed For: </label>
+        <input type="text" readonly class="form-control-plaintext" id="Act" rows="25" value="{{Mass.Needed_For}}"  style="color: white;width: 70%;" name="Act" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4" style="color: cyan;">
+      <p>{{Mass.Date_of_Complaint}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Dt" class="col-xs-2">Preferred Date:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" rows="25" value="{{ Mass.Preferred_Date }}" style="color: white;width: 60%;" name='Pref_Dt' id='Pref_Dt' readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+        <label for="ADD1" class="col-xs-2">Preferred Time:</label>
+        <input type="text" readonly class="form-control-plaintext" name='Pref_Tm' id='Pref_Tm' value="{{ Mass.Preferred_Time }}" style="color: white;width: 60%;" readonly>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="col-xs-12 col-form-label">
+      {%if Mass.Completed %}
+        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+
+      {% else %}
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+
+      {% endif %}
+      <label for="Done" class="col-xs-2">Attended/Completed</label>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="col-xs-12 col-form-label">
+        <label for="Pref_Addr" class="col-xs-2">Address:</label>
+        <input type="text" readonly class="form-control-plaintext" id="ADD1" name='Pref_Addr' id='Pref_Addr' rows="25" value="{{ Mass.Address_of_Service }}" style="color: white;width: 85%;"  readonly>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="col-xs-12 col-form-label">
+        <label for="PCD" class="col-xs-2">Pincode:</label>
+        <input type="text" readonly class="form-control-plaintext" id="PCD" rows="25" value="{{ Mass.PinCode }}" style="color: white;width: 45%;" name='PCD' id='PCD' readonly>
+      </div></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10"><div class="col-xs-12 col-form-label">
+        <label for="Desc" class="col-xs-2">Description:</label>
+        <input type="text" readonly class="form-control-plaintext" id="Desc" name="Desc" rows="25" value="{{ Mass.Description }}" style="color: white;width: 85%;"  readonly>
+      </div></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-dark" style="color: cyan;">Delete</button>
+    </div>
+  </div>
+  </div>
+  </form><br><br>
+   {% endfor %} 
+   {% else %}
+  <div class="container" style="padding-top: 1.5vw;">
+   <dt class="col-xs-12"> You haven't Requested any Repair / Reported Problems in this field.</dt>
+  </div>
+  {% endif %}
+</center>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+</body>
+{% endblock content %}

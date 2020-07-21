@@ -1,0 +1,154 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="{% static 'Houses/0_1_CompanyLogo.png' %}" type="image/x-icon">   
+<base href="{% url 'Web-Home' %}">
+<link rel="stylesheet" href="{% static 'Houses/Homepage.css' %}" type="text/css">
+<style>
+	body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+	a{
+	text-decoration: none;
+	color:white;
+}
+
+
+	a:hover{
+	font-weight: bold;
+	font-size: 1.2vw;
+	text-decoration: none;
+	color:black;
+}
+
+</style>
+<body>
+<div>
+<img src="{% static 'Houses/bg1.jpg' %}" width="100%" class="img-fluid" alt="HouseService" style="opacity: 0.8;">
+</div>
+<br>
+<center>
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;background-color: #E8E8E8;padding: 2vw;border-radius: 1vw;font-size: 1.05vw;">
+		<div class="p-2" style="background-color: #686868;padding: 1vw;border-radius: 1vw;"><a href="#Here_House_Clean" style="color: #FFD12A;">
+			<img src="{% static 'Houses/0_icon_houseKeeping.png' %}" width="60" height="60">
+			<br>House Keeping</a>
+		</div>
+
+		<div class="p-2" style="background-color: #686868;padding: 1vw;border-radius: 1vw;"><a href="#Here_Fitness" style="color: #FFD12A;">
+			<img src="{% static 'Houses/0_icon_trainner.png' %}" width="60" height="60">
+			<br>Personal Trainer</a>
+		</div>
+
+	  <div class="p-2" style="background-color: #686868;padding: 1vw;border-radius: 1vw;"><a href="#Here_App_Rep" style="color: #FFD12A;">
+			<img src="{% static 'Houses/0_icon_repairAppliances.png' %}" width="60" height="60">
+			<br>Appliances Repair</a>
+		</div>
+
+	  <div class="p-2" style="background-color: #686868;padding: 1vw;border-radius: 1vw;"><a href="#Here_Massage_SPA" style="color: #FFD12A;">
+			<img src="{% static 'Houses/0_icon_spaMassage.png' %}" width="60" height="60">
+			<br>Massage/Spa/Salon</a>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" id="Here_App_Rep">
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
+			<a href="{% url 'Electrical-Fault' %}" style="text-decoration: none;">
+				<img src="{% static 'Houses/1_Repair_AC.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>Repair Your Devices
+			</a>
+		</div>
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
+			<a href="{% url 'Plumbing-Fault' %}" style="text-decoration: none;">
+				<img src="{% static 'Houses/1_Plumbing1.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+				<br>Repair Broken Taps and Tubes
+			</a>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;">
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" id="Here_House_Clean">
+			<a href="{% url 'Housekeeping-Request' %}" style="text-decoration: none;">
+				<img src="{% static 'Houses/Housekeeping.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>House Keeping
+			</a>
+		</div>
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" id="Here_Fitness">
+			<a href="{% url 'Trainer-Request' %}" style="text-decoration: none;" >
+				<img src="{% static 'Houses/1_Personal_Trainner.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+			<br>Personal Trainer
+			</a>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" id="Here_Massage_SPA">
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
+			<a href="{% url 'Salon-Request' %}" style="text-decoration: none;">
+				<img src="{% static 'Houses/1_Grooming_female.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+				<br>Salon
+			</a>
+		</div>
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
+			<a href="{% url 'Massage-Request' %}" style="text-decoration: none;">
+				<img src="{% static 'Houses/1_Spa_2.png' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+			<br>Massage/Spa</a>
+			</a>
+		</div>
+	</div>
+  </center>
+</body>
+{% endblock content %}
+<!-- <footer>
+			<br><hr>
+			<center>
+				<h3>Follow #PS</h3>
+				<a href="#" target="_blank"><img src="{% static 'Houses/0_0_0_Follow@fb.png' %}" class="follow" width="50" height="50"></a>&nbsp &nbsp
+				<a href="#" target="_blank"><img src="{% static 'Houses/0_0_0_Follow@instagram.png' %}" class="follow" width="50" height="50"></a>&nbsp &nbsp 
+				<a href="#" target="_blank"><img src="{% static 'Houses/0_0_0_Follow@twitter.jpg' %}" class="follow" width="50" height="50"></a>
+				<hr><br><br>
+			</center>
+			<center>
+				<table border="1">
+					<tr>
+						<th><h3><b>Quicklinks</b></h3></th>
+						<th><h3><b>Teams</b></h3></th>
+						<th><b>&nbsp &nbsp &nbsp Contact Us</b> </th>
+					</tr>
+					<tr>
+						<td valign="top" align="left">
+							<ul type="none">
+								<li><a href="" target="_blank">Blog</a></li><br>
+								<li><a href="" target="_blank"></a></li><br>
+								<li><a href="" target="_blank"></a></li><br>
+							</ul>
+						</td>
+						<td valign="top"  align="left">
+							<ul type="none">
+								<li><a href="" target="_blank"></a></li><br>
+								<li><a href="" target="_blank"></a></li><br>
+								<li><a href="" target="_blank"></a></li><br>
+								<li><a href="" target="_blank"></a></li><br>
+							</ul>
+						</td>
+						<td valign="top"  align="left">
+							<ul type="none">
+								<li><a href="{% url 'ContactUs' %}" target="_blank">Contact us</a></li><br>
+								<li><a href="{% url 'ContactUs' %}" target="_blank">Sponsorship</a></li><br>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</center>
+			<hr>
+			<div class="tnc">
+				<div class="tncI tnc1">
+					© Copyright Proffesional Services, 2020. All Rights Reserved.
+				</div>
+				<div class="tncI tnc2">
+					<a href="#">Terms and Conditions</a>
+				</div>
+				<div class="tncI tnc2">
+					<a href="#">Privacy Policy</a>
+				</div>
+			</div>	
+		</footer> -->

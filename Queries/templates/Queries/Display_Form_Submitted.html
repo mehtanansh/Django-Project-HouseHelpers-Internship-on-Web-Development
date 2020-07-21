@@ -1,0 +1,50 @@
+{% extends "Houses/Base.html" %}
+{% load static %}
+{% block content %}
+<style>
+	html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+</style>
+<body>
+	<CENTER>
+  <div class="container">
+    <h1>House-Helpers</h1>
+    <h2>Professional Services at Your Door-Step</h2>
+	<div>
+		<img src="{% static 'Houses/tick.jpg' %}" class="img-fluid" >
+	<br><br>
+	<div class="container">
+		<strong>Your Form has been Submitted!</strong><br>You will recieve your <strong>Confirmation E-Mail in the next 12Hrs</strong>. If you don't recieve any E-mail pls<strong> <a href="{% url 'ContactUs' %}">Contact Us</a></strong>!!<br>
+		Our Member will come to your home and fix your Problem(or your request). <br> Hope you have a good experience with our Team.<br><br>If you wish to <strong>Cancel your Request: Pls Contact Us Via E-Mail or Phone Numbers or you can delete the request from your <a href="{% url 'MyAccount_User' %}"> Profile.</a> </strong>Given on the Website.
+		<br><p  style="color: blue">Thank You !!!!</p><br>
+	</div>
+	<button type="button" class="btn btn-outline-success">
+		<a href="{% url 'Web-Home' %}" style="text-decoration: none;color:black;" > &laquo; Back To home </a>
+	</button>
+	<button type="button" class="btn btn-outline-danger">
+		<a href="{% url 'Logout' %}" style="text-decoration: none;color:black;" class="next"> Logout &raquo;</a>
+	</button></fieldset>
+	</CENTER>
+	</div>
+</div></body>
+{% endblock %}
