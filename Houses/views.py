@@ -171,8 +171,8 @@ def MyAccount(request):
 			messages.info(request,"Please Enter Valid Password")
 			return redirect('MyAccount_User')
 	else:
-		username = request.user.username
-		OBJ1=Customer.objects.get(username=username)
+		username1 = request.user.username
+		OBJ1=Customer.objects.get(username=username1)
 		return render(request,'Houses/Profile.html',{'title': 'HouseHelpers-MyAccount','users' : OBJ1})
 
 
