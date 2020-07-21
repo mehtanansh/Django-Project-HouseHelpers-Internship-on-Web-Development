@@ -139,3 +139,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT=587
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
