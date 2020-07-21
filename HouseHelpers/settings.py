@@ -125,13 +125,14 @@ USE_TZ = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
+STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles'),
 STATIC_URL = '/static/'
 
 
 EMAIL_USE_TLS=True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER='infohousehelper@gmail.com'
-EMAIL_HOST_PASSWORD='HHtest@123'
+EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT=587
-# EMAIL_HOST_USER=os.environ.get('EMAIL_USER')
-# EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASS')
+# EMAIL_HOST_USER=
+# EMAIL_HOST_PASSWORD=
