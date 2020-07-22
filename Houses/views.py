@@ -131,7 +131,7 @@ def SignIn(request):
 			user = authenticate(username=username, password=password)			
 			if user is not None:
 				login(request,user)
-				return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
+				return redirect('Web-Home')
 			else:
 				messages.info(request,'Invalid credentials')
 				return redirect('SignIn-User')
