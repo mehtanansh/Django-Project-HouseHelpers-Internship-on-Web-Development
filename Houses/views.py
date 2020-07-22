@@ -28,6 +28,46 @@ def Homes(request):
 def ContactUs(request):
 	return render(request,'Houses/ContactUs.html',{'title': 'HouseHelpers-ContactUs'})
 
+
+def Email_Verify(request):
+	global OTP_sent
+	OTP_sent = Get_OTP(5)
+	if request.user.is_authenticated:
+		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
+	else:
+		if request.method == 'POST':
+			form = Email_Verification(request.POST)
+			if form.is_valid():
+				PINUsers = form.cleaned_data['Enter_OTP']
+				if (PINUsers == OTP_sent):
+					global List_All
+					user = User.objects.create_user(username=List_All[0],password=List_All[1],first_name=List_All[2],last_name=List_All[3],email=List_All[4])
+					user.save()
+					PPP=List_All[1]
+					PWRD_OG=make_password(PPP)
+					Cust=Customer(username=List_All[0],password=PWRD_OG,First_Name=List_All[2],Last_Name=List_All[3],Email=List_All[4],City=List_All[5],Address_Line_1=List_All[6],Address_Line_2=List_All[7],Contact=List_All[8],Gender=List_All[9],PinCode=List_All[10])
+					Cust.save()
+					messages.info(request,"User Saved!!")
+					return redirect('SignIn-User')
+				else:
+					messages.info(request,"Please Enter the correct OTP!\nWait till we send you another")
+					return redirect('Email-Verify')
+		else:
+			subject="House Helpers"
+			global List_All
+			message = render_to_string('Houses/Email_Format.html', {
+			    'user1': List_All[0],
+                'otp':OTP_sent,
+            })
+			from_email=settings.EMAIL_HOST_USER
+			to_list=[List_All[4]]
+			email_to_send=EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list)
+			email_to_send.content_subtype = "html"
+			email_to_send.send(fail_silently=False)
+			form = Email_Verification()
+			return render(request,'Houses/OTP.html',{'title': 'Email_Verify','form':form})
+
+
 def SignUp(request):
 	if request.user.is_authenticated:
 		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
@@ -79,45 +119,6 @@ def SignUp(request):
 		else:
 			form = UserSignUpForm()
 			return render(request,'Houses/SignUp.html',{'title': 'HouseHelpers-SignUp','form':form})
-
-
-
-def Email_Verify(request):
-	global OTP_sent
-	OTP_sent = Get_OTP(5)
-	if request.user.is_authenticated:
-		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
-	else:
-		if request.method == 'POST':
-			form = Email_Verification(request.POST)
-			if form.is_valid():
-				PINUsers = form.cleaned_data['Enter_OTP']
-				if (PINUsers == OTP_sent):
-					global List_All
-					user = User.objects.create_user(username=List_All[0],password=List_All[1],first_name=List_All[2],last_name=List_All[3],email=List_All[4])
-					user.save()
-					PPP=List_All[1]
-					PWRD_OG=make_password(PPP)
-					Cust=Customer(username=List_All[0],password=PWRD_OG,First_Name=List_All[2],Last_Name=List_All[3],Email=List_All[4],City=List_All[5],Address_Line_1=List_All[6],Address_Line_2=List_All[7],Contact=List_All[8],Gender=List_All[9],PinCode=List_All[10])
-					Cust.save()
-					messages.info(request,"User Saved!!")
-					return redirect('SignIn-User')
-				else:
-					messages.info(request,"Please Enter the correct OTP!\nWait till we send you another")
-					return redirect('Email-Verify')
-		else:
-			subject="House Helpers"
-			message = render_to_string('Houses/Email_Format.html', {
-			    'user1': List_All[0],
-                'otp':OTP_sent,
-            })
-			from_email=settings.EMAIL_HOST_USER
-			to_list=[List_All[4]]
-			email_to_send=EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list)
-			email_to_send.content_subtype = "html"
-			email_to_send.send(fail_silently=False)
-			form = Email_Verification()
-			return render(request,'Houses/OTP.html',{'title': 'Email_Verify','form':form})
 
 
 
