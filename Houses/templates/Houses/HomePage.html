@@ -13,7 +13,7 @@
 
 	a{
 	text-decoration: none;
-	color:white;
+	color:grey;
 }
 
 
@@ -51,12 +51,58 @@
 			<img src="{% static 'Houses/0_icon_spaMassage.png' %}" width="60" height="60">
 			<br>Massage/Spa/Salon</a>
 		</div>
-	</div>
+	</div><br><br>
 
-	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" id="Here_App_Rep">
+		<div class="container" style="background-color: rgba(0,0,0,0.5);padding: 20px;border-radius: 10px;">
+			<h3 style="color: crimson;">Available Services</h3>
+			<div class="row">
+	    		<div class="col-sm" id="Here_App_Rep"  style="padding: 15px;">
+	    			<a href="{% url 'Electrical-Fault' %}" style="text-decoration: none;">
+	      			<img src="{% static 'Houses/1_Repair_AC.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>Repair Your Devices</a>
+	    		</div>
+	    		<div class="col-sm"  style="padding: 15px;">
+	    			<a href="{% url 'Plumbing-Fault' %}" style="text-decoration: none;" >
+					<img src="{% static 'Houses/1_Plumbing1.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+				<br>Repair Broken Taps and Tubes
+					</a>		  
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-sm" id="Here_House_Clean"  style="padding: 15px;">
+	    			<a href="{% url 'Housekeeping-Request' %}" style="text-decoration: none;">
+					<img src="{% static 'Houses/Housekeeping.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>House Keeping
+					</a>
+	    		</div>
+	    		<div class="col-sm" id="Here_Fitness" style="padding: 15px;">
+	    			<a href="{% url 'Trainer-Request' %}" style="text-decoration: none;" >
+					<img src="{% static 'Houses/1_Personal_Trainner.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+					<br>Personal Trainer
+					</a>
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-sm" style="padding: 15px;">
+	    			<a href="{% url 'Salon-Request' %}" style="text-decoration: none;">
+					<img src="{% static 'Houses/1_Grooming_female.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+					<br>Salon
+					</a>
+	    		</div>
+	    		<div class="col-sm" id="Here_Massage_SPA" style="padding: 15px;">
+	    			<a href="{% url 'Massage-Request' %}" style="text-decoration: none;">
+					<img src="{% static 'Houses/1_Spa_2.png' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
+					<br>Massage/Spa</a>
+					</a>
+	    		</div>
+	    	</div>
+    	</div>
+
+
+
+<!-- 
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" >
 		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
-			<a href="{% url 'Electrical-Fault' %}" style="text-decoration: none;">
-				<img src="{% static 'Houses/1_Repair_AC.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>Repair Your Devices
+			
+				
 			</a>
 		</div>
 		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
@@ -68,34 +114,23 @@
 	</div>
 
 	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;">
-		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" id="Here_House_Clean">
-			<a href="{% url 'Housekeeping-Request' %}" style="text-decoration: none;">
-				<img src="{% static 'Houses/Housekeeping.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;"><br>House Keeping
-			</a>
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" >
+			
 		</div>
-		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" id="Here_Fitness">
-			<a href="{% url 'Trainer-Request' %}" style="text-decoration: none;" >
-				<img src="{% static 'Houses/1_Personal_Trainner.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
-			<br>Personal Trainer
-			</a>
+		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;" >
+			
 		</div>
 	</div>
 
-	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" id="Here_Massage_SPA">
+	<div class="d-flex flex-row justify-content-around" style="padding: 2%;padding: 2vw;border-radius: 1.5vw;" >
 		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
-			<a href="{% url 'Salon-Request' %}" style="text-decoration: none;">
-				<img src="{% static 'Houses/1_Grooming_female.jpg' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
-				<br>Salon
-			</a>
+			
 		</div>
 		<div class="d-flex-column p-5" style="padding: 1vw;border-radius: 1vw;">
-			<a href="{% url 'Massage-Request' %}" style="text-decoration: none;">
-				<img src="{% static 'Houses/1_Spa_2.png' %}" class="img-fluid" style="border-radius: 1.2vw; border:solid black;">
-			<br>Massage/Spa</a>
-			</a>
+			
 		</div>
 	</div>
-  </center>
+ -->  </center>
 </body>
 {% endblock content %}
 <!-- <footer>
