@@ -19,19 +19,20 @@ input[type=number] {
 </style>
 <body style="color:#FFF307;">
 	<center>
-		<div class="container">
+		<div class="container-md">
 		    <h1>House-Helpers</h1>
 		    <h2>Professional Services at Your Door-Step</h2>
 		</div>
-		<form method="POST" style="padding-top: 3vw;">
+    <div>
+		<form method="POST" style="padding-top: 3vw;max-width: 750px;">
 	      {% csrf_token %}
-	      <fieldset style="width: 40vw;background: rgba(0,0,0,0.5);padding: 2vw;border-radius: 1vw;">
+	      <fieldset style="background: rgba(0,0,0,0.5);padding: 2vw;border-radius: 1vw;">
 	      {% for message in messages %}
 	      <div>
 	        <strong>{{ message }}</strong>
 	      </div><br>
 	      {% endfor %}
-		  <div class="form-group col-auto">
+		  <div class="form-group col-sm-8">
 	      	<center>
 	      		<div class="form-row">
 			      <div class="form-group col-md-6 mb-0">
@@ -83,7 +84,10 @@ input[type=number] {
         <button type="submit" class="btn btn-outline-dark" style="color: #D7FF33;">Sign Up</button>
 		<big class="form-text" style="opacity: 0.8;padding-top:2vw;">
 		<a style="color: #F0FF00;" href="{% url 'SignIn-User' %}">Already a User??</a></big>
-	</center>
+  </fieldset>
+</form>
+</div>
+  </center>
 </body>
 {% endblock content %}
 

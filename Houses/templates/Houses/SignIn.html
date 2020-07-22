@@ -3,27 +3,52 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'Houses/STYLE2.css' %}">
+<style>
+  label {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+input[type=text]{
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+input[type=password] {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+}
+</style>
 <body>
     <center>
     <div class="container">
     <h1>House-Helpers</h1>
     <h2>Professional Services at Your Door-Step</h2></div>
-    <form method="POST" style="padding-top: 3vw;">
+    <div class="container">
+    <form method="POST" style="padding-top: 3vw;max-width: 600px;">
       {% csrf_token %}
-      <fieldset style="width: 28vw;background: rgba(0,0,0,0.5);padding: 2vw;border-radius: 1vw;" class="form-group">
+      <fieldset style="background: rgba(0,0,0,0.5);padding: 2vw;border-radius: 1vw;" class="form-group">
       {% for message in messages %}
       <div>
         <strong>{{ message }}</strong>
       </div><br>
     {% endfor %}
-      <div class="form-group col-auto">
-        <label for="exampleInputEmail1">Username</label>
-        <input type="text" class="form-control  col-lg-5" id="username" required name="username">
-        <small id="emailHelp" class="form-text" style="opacity: 0.6">We'll never share your email with anyone else.</small>
+      <div class="col-sm-6">
+        <label for="username" >Username</label>
+        <input type="text" class="form-control" id="username" required name="username">
       </div>
-      <div class="form-group col-auto">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control  col-lg-5" required id="Password" name="password">
+      <small id="emailHelp" class="form-text" style="opacity: 0.6">We'll never share your email with anyone else.</small>
+      <div  class="col-sm-6">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" required name="password">
       </div>
       <small class="form-text" style="opacity: 0.8;"><a href="{% url 'Password_Reset_User' %}" style="color: #D7FF33">Forgot Password?</a></small>
       <div class="form-group form-check">
@@ -31,7 +56,10 @@
         <label class="form-check-label" for="exampleCheck1" style="size:1vw;">Remember me</label></small>
       </div>
       <button type="submit" class="btn btn btn-outline-dark" style="color: #D7FF33;">Login</button>
-      <big class="form-text" style="opacity: 0.8;padding-top:2vw;"><a style="color: #D7FF33;" href="{% url 'SignUp-User' %}"><big>New User</a></big>
+      <big class="form-text" style="opacity: 0.8;padding-top:2vw;"><a style="color: #D7FF33;" href="{% url 'SignUp-User' %}"><big>New User
+      </a>
+    </big>
+    </div>
     </fieldset></form>
     </center>
 </body>
