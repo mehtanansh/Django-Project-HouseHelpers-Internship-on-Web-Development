@@ -30,6 +30,7 @@ def Email_Verify(request):
 			form = Email_Verification(request.POST)
 			if form.is_valid():
 				PINUsers = form.cleaned_data['Enter_OTP']
+				global OTP_sent
 				if (PINUsers == OTP_sent):
 					global List_All
 					user = User.objects.create_user(username=List_All[0],password=List_All[1],first_name=List_All[2],last_name=List_All[3],email=List_All[4])
@@ -44,6 +45,7 @@ def Email_Verify(request):
 					messages.info(request,"Please Enter the correct OTP!\nWait till we send you another")
 					return redirect('Email-Verify')
 		else:
+			global OTP_sent
 			OTP_sent = Get_OTP(5)
 			subject="House Helpers"
 			message = render_to_string('Houses/Email_Format.html', {
@@ -127,7 +129,7 @@ def SignIn(request):
 			user = authenticate(username=username, password=password)			
 			if user is not None:
 				login(request,user)
-				return redirect("Web-Home")
+				return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
 			else:
 				messages.info(request,'Invalid credentials')
 				return redirect('SignIn-User')
