@@ -30,7 +30,7 @@ def ContactUs(request):
 
 
 def Email_Verify(request):
-	global OTP_sent
+	global OTP_sent, List_All
 	OTP_sent = Get_OTP(5)
 	if request.user.is_authenticated:
 		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
@@ -53,8 +53,8 @@ def Email_Verify(request):
 					messages.info(request,"Please Enter the correct OTP!\nWait till we send you another")
 					return redirect('Email-Verify')
 		else:
-			subject="House Helpers"
 			global List_All
+			subject="House Helpers"			
 			message = render_to_string('Houses/Email_Format.html', {
 			    'user1': List_All[0],
                 'otp':OTP_sent,
