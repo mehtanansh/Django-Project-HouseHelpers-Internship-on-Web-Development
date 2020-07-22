@@ -246,7 +246,6 @@ def Pass_Reset_UsrAcc(request):
 
 
 def Pass_Reset(request):
-	global FORGOT_USER_NAME
 	NAMES_FORGET=FORGOT_USER_NAME
 	if request.user.is_authenticated:
 		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
