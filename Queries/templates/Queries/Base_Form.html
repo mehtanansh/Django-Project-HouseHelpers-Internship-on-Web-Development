@@ -2,8 +2,8 @@
 {% load static %}
 {% load crispy_forms_tags%}
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
-
 body
 {
 background-image:url("{% static 'Houses/BGI.jpg' %}");
@@ -84,16 +84,16 @@ input[type=text] {
 	    				<textarea name="Addr_Service" class="form-control" id="Addr_Service" rows="3" style="border-radius: 5px;color: black;">{{Cust.Address_Line_1}},{{Cust.Address_Line_2}},{{Cust.City}} : {{Cust.PinCode}}
 	    				</textarea><br><br>
 					</div>
-    				<div class="row">
-			    		<div class="form-group col-md-4 mb-0">
+    				<div class="row" >
+			    		<div class="form-group col-md-4 mb-0" style="padding: 20px;">
 					      	<label for="PinCode" class="col-xs-4">Pincode*</label>
 							<input type="number" name="PinCode" id="PinCode" value="{{Cust.PinCode}}">
 			    		</div>
-						<div class="form-group col-md-4 mb-0">
+						<div class="form-group col-md-4 mb-0" style="padding: 20px;">
 					      	<label for="Avail_date" class="col-xs-4">Date of Service*</label>
 							<input type="date" name="Avail_date" id='Avail_date'>
 			    		</div>
-			    		<div class="form-group col-md-4 mb-0">
+			    		<div class="form-group col-md-4 mb-0" style="padding: 20px;">
 					      	<label for="Avail_time" class="col-xs-4">Time of Service*</label>
 							<input type="time" name="Avail_time" id='Avail_time'>
 			    		</div>
