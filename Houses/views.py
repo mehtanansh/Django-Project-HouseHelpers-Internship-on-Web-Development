@@ -30,7 +30,6 @@ def Email_Verify(request):
 			form = Email_Verification(request.POST)
 			if form.is_valid():
 				PINUsers = form.cleaned_data['Enter_OTP']
-				global OTP_sent
 				if (PINUsers == OTP_sent):
 					global List_All
 					user = User.objects.create_user(username=List_All[0],password=List_All[1],first_name=List_All[2],last_name=List_All[3],email=List_All[4])
