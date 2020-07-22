@@ -1,6 +1,7 @@
 import re
 import random  
-import string  
+import string
+global OTP_sent
 global List_All
 List_All=[]
 from django.shortcuts import render, redirect
@@ -31,7 +32,6 @@ def Email_Verify(request):
 			form = Email_Verification(request.POST)
 			if form.is_valid():
 				PINUsers = form.cleaned_data['Enter_OTP']
-				global OTP_sent
 				if (PINUsers == OTP_sent):
 					global List_All
 					user = User.objects.create_user(username=List_All[0],password=List_All[1],first_name=List_All[2],last_name=List_All[3],email=List_All[4])
@@ -46,7 +46,6 @@ def Email_Verify(request):
 					messages.info(request,"Please Enter the correct OTP!\nWait till we send you another")
 					return redirect('Email-Verify')
 		else:
-			global OTP_sent
 			subject="House Helpers"
 			message = render_to_string('Houses/Email_Format.html', {
 			    'user1': List_All[0],
