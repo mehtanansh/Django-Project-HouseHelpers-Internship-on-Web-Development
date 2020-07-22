@@ -218,56 +218,56 @@ def logout(request):
 	return redirect("Web-Home")
 
 
-def Pass_Reset_UsrAcc(request):
-	if request.user.is_authenticated:
-		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
-	else:
-		if request.method=="POST":
-			users1=request.POST['USRNAME_Forget']
-			if User.objects.filter(username=users1).exists():
-				global FORGOT_USER_NAME
-				FORGOT_USER_NAME=users1
-				subject="House Helpers"
-				messaging = render_to_string('Houses/Email_Format_Password.html',{'USER1': users1,})
-				from_email=settings.EMAIL_HOST_USER
-				OBJS1=User.objects.get(username=users1)
-				TOEMAILS=OBJS1.email
-				to_list=[TOEMAILS]
-				email_to_send=EmailMessage(subject=subject, body=messaging, from_email=from_email, to=to_list)
-				email_to_send.content_subtype = "html"
-				email_to_send.send(fail_silently=False)
-				return render(request,'Houses/Forgot_Password.html',{'title':'Reset_Password','USER1':users1})
-			else:
-				messages.info(request,"Username does not exist")
-				return redirect('Password_Reset_User')
-		else:
-			return render(request,'Houses/Username_Password_Reset.html',{'title': 'Reset_Password_User_Details'})
+# def Pass_Reset_UsrAcc(request):
+# 	if request.user.is_authenticated:
+# 		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
+# 	else:
+# 		if request.method=="POST":
+# 			users1=request.POST['USRNAME_Forget']
+# 			if User.objects.filter(username=users1).exists():
+# 				global FORGOT_USER_NAME
+# 				FORGOT_USER_NAME=users1
+# 				subject="House Helpers"
+# 				messaging = render_to_string('Houses/Email_Format_Password.html',{'USER1': users1,})
+# 				from_email=settings.EMAIL_HOST_USER
+# 				OBJS1=User.objects.get(username=users1)
+# 				TOEMAILS=OBJS1.email
+# 				to_list=[TOEMAILS]
+# 				email_to_send=EmailMessage(subject=subject, body=messaging, from_email=from_email, to=to_list)
+# 				email_to_send.content_subtype = "html"
+# 				email_to_send.send(fail_silently=False)
+# 				return render(request,'Houses/Forgot_Password.html',{'title':'Reset_Password','USER1':users1})
+# 			else:
+# 				messages.info(request,"Username does not exist")
+# 				return redirect('Password_Reset_User')
+# 		else:
+# 			return render(request,'Houses/Username_Password_Reset.html',{'title': 'Reset_Password_User_Details'})
 
 
 
-def Pass_Reset(request):
-	NAMES_FORGET=FORGOT_USER_NAME
-	if request.user.is_authenticated:
-		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
-	else:
-		if request.method == 'POST':
-			P1=request.POST['PASS1']
-			P2=request.POST['PASS2']
-			if(P1==P2 and Customer.objects.filter(username=FORGOT_USER_NAME).exists()):
-				u = User.objects.get(username=NAMES_FORGET)
-				u.set_password(P1)
-				u.save()
-				P1_Real=make_password(P1)
-				OBJ1=Customer.objects.get(username=NAMES_FORGET)
-				Customs1=Customer(username=OBJ1.username,password=P1_Real,First_Name=OBJ1.First_Name,Last_Name=OBJ1.Last_Name,Email=OBJ1.Email,City=OBJ1.City,Address_Line_1=OBJ1.Address_Line_1,Address_Line_2=OBJ1.Address_Line_2,Contact=OBJ1.Contact,Gender=OBJ1.Gender,PinCode=OBJ1.PinCode)
-				Customs1.save()
-				messages.info(request,"Password Saved Successfully")
-				return redirect('SignIn-User')
-			else:
-				messages.info(request,"Both Passwords don't match.")
-				return redirect('Password_Reset')
-		else:
-			return render(request,'Houses/Password_Reset.html',{'title':'Reset_Password'})
+# def Pass_Reset(request):
+# 	NAMES_FORGET=FORGOT_USER_NAME
+# 	if request.user.is_authenticated:
+# 		return render(request,'Houses/HomePage.html',{'title': 'HouseHelpers-Home'})
+# 	else:
+# 		if request.method == 'POST':
+# 			P1=request.POST['PASS1']
+# 			P2=request.POST['PASS2']
+# 			if(P1==P2 and Customer.objects.filter(username=FORGOT_USER_NAME).exists()):
+# 				u = User.objects.get(username=NAMES_FORGET)
+# 				u.set_password(P1)
+# 				u.save()
+# 				P1_Real=make_password(P1)
+# 				OBJ1=Customer.objects.get(username=NAMES_FORGET)
+# 				Customs1=Customer(username=OBJ1.username,password=P1_Real,First_Name=OBJ1.First_Name,Last_Name=OBJ1.Last_Name,Email=OBJ1.Email,City=OBJ1.City,Address_Line_1=OBJ1.Address_Line_1,Address_Line_2=OBJ1.Address_Line_2,Contact=OBJ1.Contact,Gender=OBJ1.Gender,PinCode=OBJ1.PinCode)
+# 				Customs1.save()
+# 				messages.info(request,"Password Saved Successfully")
+# 				return redirect('SignIn-User')
+# 			else:
+# 				messages.info(request,"Both Passwords don't match.")
+# 				return redirect('Password_Reset')
+# 		else:
+# 			return render(request,'Houses/Password_Reset.html',{'title':'Reset_Password'})
 
 
 
