@@ -10,9 +10,10 @@
 
 # This Project includes: 
 * User Sign up (User Verification through Email)
-* User Login and Sign Up
+* User Login
+* Form handling
 * User Profile and Updation
 * Password Change
 * User Problem / Request Form Handling and Database Updation
 * User Problem / Requests page
-* Database updation of the User Requests
+* Database updation of the User Requests (Delete, Update)
