@@ -97,7 +97,7 @@ pytz==2019.3
 PyWavelets==1.1.1
 pywin32-ctypes==0.2.0
 PyX==0.15
-PyYAML==5.2
+PyYAML==5.4
 pyzmq==18.1.1
 QDarkStyle==2.7
 QtAwesome==0.6.0
